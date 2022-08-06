@@ -9,7 +9,12 @@
 </head>
 
 <body>
-    <div><a href="/">home</a>&nbsp;<a href="/chart">chart</a></div>
+    <div><a href="/">home</a>&nbsp;<a href="/chart">chart</a>&nbsp;<a href="/market">market</a></div>
+    <% if (user) { %>
+        <h2><%= user %></h2>
+        <a href="/auth/signout">logout</a>
+      <% } %>
+      
     <!-- TradingView Widget BEGIN -->
     <div class="tradingview-widget-container">
         <div class="tradingview-widget-container__widget"></div>
