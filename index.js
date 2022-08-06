@@ -11,6 +11,8 @@ app.get("/", (req, res) => {
 
 app.use('/auth',authRoute)
 
+app.use(express.json())
+
 const dbURL = process.env.DBURL;
 
 mongoose.connect(dbURL, { useNewUrlParser: true, useUnifiedTopology: true })
