@@ -2,7 +2,7 @@ require('dotenv').config()
 const express = require('express')
 const mongoose = require('mongoose')
 const authRoute = require('./routes/authroute')
-
+const cookieParser = require('cookie-parser')
 const app = express()
 
 app.get("/", (req, res) => {
@@ -10,6 +10,7 @@ app.get("/", (req, res) => {
 })
 
 app.use(express.json())
+app.use(cookieParser())
 
 app.use('/auth',authRoute) 
 
