@@ -11,6 +11,14 @@ app.get("/", (req, res) => {
     res.render('home')
 })
 
+app.get("/signup", (req, res) => {
+    res.render('signup')
+})
+
+app.get("/signin", (req, res) => {
+    res.render('signin')
+})
+
 app.use(express.json())
 app.use(cookieParser())
 
