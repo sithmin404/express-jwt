@@ -1,6 +1,9 @@
 
+require('dotenv').config()
 const {Router} = require('express')
 const userModel = require('../models/usermodel')
+const jwt = require('jsonwebtoken')
+
 const router = Router()
 
 router.get("/signup",(req,res)=>{
@@ -15,7 +18,9 @@ router.post("/signup",async(req,res)=>{
     const {email,password} = req.body;
     try {
         const user = await userModel.create({email,password})
-        res.status(201).json(user)
+        const token = jwt.sign({id:user._id},process.env.JWT_SECRET,{expiresIn:3600})
+        res.cookie('jwt',token,{httpOnly:true,maxAge:3600*1000})
+        res.status(201).json({user:user._id})
     } catch (error) {
         res.status(401).json({error:error.message})
     }
