@@ -5,8 +5,10 @@ const authRoute = require('./routes/authroute')
 const cookieParser = require('cookie-parser')
 const app = express()
 
+app.set('view engine','ejs')
+
 app.get("/", (req, res) => {
-    res.json({ msg: 'hello world' })
+    res.render('home')
 })
 
 app.use(express.json())
