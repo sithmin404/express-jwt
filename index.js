@@ -9,9 +9,9 @@ app.get("/", (req, res) => {
     res.json({ msg: 'hello world' })
 })
 
-app.use('/auth',authRoute)
-
 app.use(express.json())
+
+app.use('/auth',authRoute) 
 
 const dbURL = process.env.DBURL;
 
