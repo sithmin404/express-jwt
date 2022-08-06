@@ -3,7 +3,11 @@ const express = require('express')
 const mongoose = require('mongoose')
 const authRoute = require('./routes/authroute')
 const cookieParser = require('cookie-parser')
+const {requireAuth} = require('./middleware/authMiddleware')
 const app = express()
+
+app.use(express.json())
+app.use(cookieParser())
 
 app.set('view engine','ejs')
 
@@ -19,12 +23,9 @@ app.get("/signin", (req, res) => {
     res.render('signin')
 })
 
-app.get("/chart", (req, res) => {
+app.get("/chart",requireAuth ,(req, res) => {
     res.render('chart')
 })
-
-app.use(express.json())
-app.use(cookieParser())
 
 app.use('/auth',authRoute) 
 
