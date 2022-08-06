@@ -19,6 +19,10 @@ app.get("/signin", (req, res) => {
     res.render('signin')
 })
 
+app.get("/chart", (req, res) => {
+    res.render('chart')
+})
+
 app.use(express.json())
 app.use(cookieParser())
 

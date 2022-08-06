@@ -6,13 +6,13 @@ const jwt = require('jsonwebtoken')
 
 const router = Router()
 
-router.get("/signup",(req,res)=>{
-    res.send("signup get")
-})
+// router.get("/signup",(req,res)=>{
+//     res.send("signup get")
+// })
 
-router.get("/signin",(req,res)=>{
-    res.send("signin get")
-})
+// router.get("/signin",(req,res)=>{
+//     res.send("signin get")
+// })
 
 router.post("/signup",async(req,res)=>{
     const {email,password} = req.body;
@@ -36,7 +36,11 @@ router.post("/signin",async(req,res)=>{
     } catch (error) {
         res.status(401).json({error:error.message})
     }
-    
+})
+
+router.get("/signout",(req,res)=>{
+    res.cookie('jwt','',{maxAge:1})
+    res.redirect('/')
 })
 
 module.exports = router;
