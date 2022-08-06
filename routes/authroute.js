@@ -26,8 +26,17 @@ router.post("/signup",async(req,res)=>{
     }
 })
 
-router.post("/signin",(req,res)=>{
-    res.send("signin post")
+router.post("/signin",async(req,res)=>{
+    const {email,password} = req.body;
+    try {
+        const user = await userModel.login(email,password)
+        const token = jwt.sign({id:user._id},process.env.JWT_SECRET,{expiresIn:3600})
+        res.cookie('jwt',token,{httpOnly:true,maxAge:3600*1000})
+        res.status(201).json({user:user._id})
+    } catch (error) {
+        res.status(401).json({error:error.message})
+    }
+    
 })
 
 module.exports = router;
